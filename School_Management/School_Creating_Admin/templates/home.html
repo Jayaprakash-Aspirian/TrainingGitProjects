@@ -1,0 +1,17 @@
+{% extends 'signup.html' %}
+{% load static %}
+{% block head %}
+<title>Home</title>
+{% endblock %}
+{% block body %}
+    <div>
+        <pre class="form_login">
+            <h1 style="margin:70px;">Admin Site</h1>
+        </pre>
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="text-right"> <button class="btn btn-success register btn-block"><a href="{% url 'login' %}"  style="color:white;" class="signup">Login</a></button> </div> 
+	        <div class="text-right"> <button class="btn btn-success register btn-block"><a href="{% url 'signup' %}"   style="color:white;"class="signup">Signup</a></button></div> 
+        </div>
+    </div>
+
+{% endblock %}

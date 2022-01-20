@@ -1,0 +1,26 @@
+{% extends 'signup.html' %}
+{% load static %}
+{% block head %}
+<title>Login</title>
+{% endblock %}
+{% block body %}
+    <form  method="POST" action="authenticate_user/" class="form" >
+        <pre class="form_login">
+ 	    {% csrf_token %}
+            <h1 class="login">{{title}}</h1><br>
+            <div class="inputbox mt-3"><label for="{{ form.username.id_for_label }}" class="fontsize_20">{{form.username.label_tag}}</label>{{form.username}}</div>
+            <div class="inputbox mt-3"><label for="{{ form.password.id_for_label }}" class="fontsize_20">{{form.password.label_tag}}</label>{{form.password}}</div>
+            <br>
+         </pre>
+         <div class="d-flex justify-content-between align-items-center">
+         	<div class="text-right"> <button class="btn btn-success register btn-block">Login</button> </div> <a href="{% url 'signup' %}" class="login">Signup</a>
+         </div>
+            {% for message in messages %}
+                {% if 'correct_message' in message.extra_tags %}
+                    <b class="correct_message">{{message}}</b>
+                {% else %}
+                    <b class="wrong_message">{{message}}</b>
+                {% endif %}
+            {% endfor %}
+    </form>
+{% endblock %}

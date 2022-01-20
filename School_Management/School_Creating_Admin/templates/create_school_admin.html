@@ -1,0 +1,43 @@
+{% extends 'main_admin_dashboard.html' %}
+{% load static %}
+{% block head %}
+<title>Create School Admin</title>
+{% endblock %}
+{% block content %}
+<li ><a href="{% url 'main_admin_dashboard' %}" class="text-decoration-none d-flex align-items-start">
+    <div class="fas fa-box pt-2 me-3"></div>
+    <div class="d-flex flex-column">
+        <div class="link">My Account</div>
+        <div class="link-desc">School Management</div>
+    </div>
+</a> </li>
+
+<li class="active"> <a href="#" class="text-decoration-none d-flex align-items-start">
+    <div class="far fa-address-book pt-2 me-3"></div>
+    <div class="d-flex flex-column">
+        <div class="link">Create School & School Admin</div>
+        <div class="link-desc">View & Manage Schools</div>
+    </div>
+</a> </li>
+{% endblock content %}
+{% block body %}
+<form method="POST" action="/main_admin/addschool/" >
+    <div class="text-uppercase">Create School & School Admin</div>
+    {% csrf_token %}
+    <div class="order my-3 bg-light">
+        <div class="inputbox mt-3"><label for="{{ form.schoolname.id_for_label }}" class="fontsize_20">{{form.schoolname.label_tag}}  </label>   {{form.schoolname}}<br><span class="input">{{form.schoolname.errors}}</span> </div>
+        <div class="inputbox mt-3"><label for="{{ form.schooladdress.id_for_label }}" class="fontsize_20">{{form.schooladdress.label_tag}}   </label> {{form.schooladdress}}<br><span class="input">{{form.schooladdress.errors}}</span></div>
+        <div class="inputbox mt-3"><label for="{{ form.schooldistrict.id_for_label }}" class="fontsize_20">{{form.schooldistrict.label_tag}}   </label>    {{form.schooldistrict}} <br><span class="input">{{form.schooldistrict.errors}}</span></div>
+
+    </div>
+
+    <div class="order my-3 bg-light">
+        <div class="inputbox mt-3"><label for="{{ form.username.id_for_label }}" class="fontsize_20">{{form.username.label_tag}}  </label>    {{form.username}}<br><span class="input">{{form.username.errors}}</span> </div>
+        <div class="inputbox mt-3"><label for="{{ form.password.id_for_label }}" class="fontsize_20">{{form.password.label_tag}}  </label>    {{form.password}}<br><span class="input">{{form.password.errors}}</span></div>
+    </div>
+    
+    <div > <button class="btn btn-success register btn-block">Add School</button> </div> 
+
+</form>
+
+{% endblock %}

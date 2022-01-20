@@ -1,0 +1,103 @@
+{% extends 'main_admin_dashboard.html' %}
+{% load static %}
+{% block head %}
+<title>Create School Admin</title>
+{% endblock %}
+{% block content %}
+<li> <a href="{% url 'school_admin_dashboard' %}" class="text-decoration-none d-flex align-items-start">
+    <div class="fas fa-box pt-2 me-3"></div>
+    <div class="d-flex flex-column">
+        <div class="link">My Account</div>
+        <div class="link-desc">Teacher Lists</div>
+    </div>
+</a> </li>
+
+<li> <a href="{% url 'create_teacher_account' %}" class="text-decoration-none d-flex align-items-start">
+    <div class="far fa-address-book pt-2 me-3"></div>
+    <div class="d-flex flex-column">
+        <div class="link">Create Teachers Account</div>
+        <div class="link-desc">View & Manage Teachers Account</div>
+    </div>
+</a> </li>
+<li class="active"> <a href="#" class="text-decoration-none d-flex align-items-start">
+    <div class="far fa-address-book pt-2 me-3"></div>
+    <div class="d-flex flex-column">
+        <div class="link">Create Student Account</div>
+        <div class="link-desc">View & Manage Student Account</div>
+    </div>
+</a> </li>
+<li> <a href="{% url 'create_student_subjects' %}" class="text-decoration-none d-flex align-items-start">
+    <div class="far fa-address-book pt-2 me-3"></div>
+    <div class="d-flex flex-column">
+        <div class="link">Create Student Subjects</div>
+        <div class="link-desc">View & Manage Class Subjects </div>
+    </div>
+</a> </li>
+{% endblock %}
+{% block content1 %}
+<div class="d-flex my-4 flex-wrap">
+    
+    <div class="box me-4 my-1 bg-light"> <img src="https://www.freepnglogos.com/uploads/love-png/love-png-heart-symbol-wikipedia-11.png" alt="">
+        <div class="d-flex align-items-center mt-2">
+            <div class="tag">Students</div>
+            <div class="ms-auto number">{{ students.count }}</div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block body %}
+
+<h2 >Student Account Registration</h2>
+
+<div class="order my-3 bg-light">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="d-flex flex-column justify-content-between order-summary">
+                <form action="/school_admin/addteacher/" method="POST"  >
+                    <pre >
+                        {% csrf_token %}
+                        <h4>Personal Details</h4>
+                        <div class="inputbox mt-3"><label for="{{ form1.firstname.id_for_label }}" class="fontsize_20">{{form1.firstname.label_tag}}   </label>{{form1.firstname}}<br><span class="input">{{form1.firstname.errors}}</span></div>
+                        <div class="inputbox mt-3"><label for="{{ form1.lastname.id_for_label }}" class="fontsize_20">{{form1.lastname.label_tag}}   </label>{{form1.lastname}} <br><span class="input">{{form1.lastname.errors}}</span></div>
+                        <div class="inputbox mt-3"><label for="{{ form1.email.id_for_label }}" class="fontsize_20">{{form1.email.label_tag}}         </label> {{form1.email}}<br><span class="input">{{form1.email.errors}}</span></div>
+                        <div class="inputbox mt-3"><label for="{{ form.teacher_subject.id_for_label }}" class="fontsize_20">{{form.teacher_subject.label_tag}}  </label>  {{form.teacher_subject}}<br><span class="input">{{form.teacher_subject.errors}}</span></div>
+                        <div class="inputbox mt-3"><label for="{{ form.teacher_address.id_for_label }}" class="fontsize_20">{{form.teacher_address.label_tag}}  </label> {{form.teacher_address}}<br><span class="input">{{form.teacher_address.errors}}</span></div>
+                        <div class="inputbox mt-3"><label for="{{ form.teacher_phone.id_for_label }}" class="fontsize_20">{{form.teacher_phone.label_tag}}  </label>     {{form.teacher_phone}}<br><span class="input">{{form.teacher_phone.errors}}</span></div>
+                        <hr>
+                        <h4>User Details</h4>
+                        <div class="inputbox mt-3"><label for="{{ form1.username.id_for_label }}" class="fontsize_20">{{form1.username.label_tag}}  </label>{{form1.username}}<br><span class="input">{{form1.username.errors}}</span> </div>
+                        <div class="inputbox mt-3"><label for="{{ form1.password.id_for_label }}" class="fontsize_20">{{form1.password.label_tag}}  </label>{{form1.password}}<br><span class="input">{{form1.password.errors}}</span></div>
+                        <hr>
+                        <h4>Teacher Taking Class Details</h4>
+                        <div class="inputbox mt-3"><label for="{{ form.teacher_taking_class1.id_for_label }}" class="fontsize_20">{{form.teacher_taking_class1.label_tag}}  </label>{{form.teacher_taking_class1}} {{form.teacher_taking_class1_section}} <br><span class="input">{{form.teacher_taking_class1.errors}}</span></div>
+                        <div class="inputbox mt-3"><label for="{{ form.teacher_taking_class2.id_for_label }}" class="fontsize_20">{{form.teacher_taking_class2.label_tag}}  </label>{{form.teacher_taking_class2}} {{form.teacher_taking_class2_section}}<br><span class="input">{{form.teacher_taking_class2.errors}}</span></div>
+                        <div class="inputbox mt-3"><label for="{{ form.teacher_taking_class3.id_for_label }}" class="fontsize_20">{{form.teacher_taking_class3.label_tag}}  </label>{{form.teacher_taking_class3}} {{form.teacher_taking_class3_section}}<br><span class="input">{{form.teacher_taking_class3.errors}}</span></div>
+                        <div class="inputbox mt-3"><label for="{{ form.teacher_taking_class4.id_for_label }}" class="fontsize_20">{{form.teacher_taking_class4.label_tag}}  </label>{{form.teacher_taking_class4}} {{form.teacher_taking_class4_section}}<br><span class="input">{{form.teacher_taking_class4.errors}}</span></div>
+                        <div class="inputbox mt-3"><label for="{{ form.teacher_taking_class5.id_for_label }}" class="fontsize_20">{{form.teacher_taking_class5.label_tag}}  </label>{{form.teacher_taking_class5}} {{form.teacher_taking_class5_section}}<br><span class="input">{{form.teacher_taking_class5.errors}}</span></div>    
+                        </pre>	 
+                        <div class="d-flex justify-content-between align-items-center">
+                             <div class="text-right"> <button class="btn btn-success register btn-block">+ Add Teacher </button> </div> 
+                        </div>
+    
+
+                        <div>
+                            {% for message in messages %}
+                            <h5 class="wrong_message">{{message}}</h5>
+                            {% endfor %}
+                        </div>
+                    </pre>
+                </form>
+               
+ 
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <br><br><br>
+            <img src="{% static 'images/teacher_logo1.jpg' %}" width=250 height=200>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

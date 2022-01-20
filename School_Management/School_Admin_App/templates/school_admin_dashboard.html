@@ -1,0 +1,214 @@
+{% extends 'main_admin_dashboard.html' %}
+{% load static %}
+{% load templatetagname %}
+{% block head %}
+<title>Dashboard</title>
+{% endblock %}
+
+{% block logout %}
+{% if request.user|has_group:'School_Admin' %} 
+<li class="nav-item"> <a class="nav-link" href="{% url 'school_admin_logout' %}">logout</a> </li>
+{% elif request.user|has_group:'Teacher' %} 
+<li class="nav-item"> <a class="nav-link" href="{% url 'teacher_logout' %}">logout</a> </li>
+{% elif request.user|has_group:'Student' %} 
+<li class="nav-item"> <a class="nav-link" href="{% url 'student_logout' %}">logout</a> </li>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% if request.user|has_group:'School_Admin' %} 
+<li class="active"> <a href="#" class="text-decoration-none d-flex align-items-start">
+    <div class="fas fa-box pt-2 me-3"></div>
+    <div class="d-flex flex-column">
+        <div class="link">My Account</div>
+        <div class="link-desc">Teacher Lists</div>
+    </div>
+</a> </li>
+<li> <a href="{% url 'create_teacher_account' %}" class="text-decoration-none d-flex align-items-start">
+    <div class="far fa-address-book pt-2 me-3"></div>
+    <div class="d-flex flex-column">
+        <div class="link">Create Teachers Account</div>
+        <div class="link-desc">View & Manage Teachers Account</div>
+    </div>
+</a> </li>
+<li> <a href="{% url 'create_student_account' %}" class="text-decoration-none d-flex align-items-start">
+    <div class="far fa-address-book pt-2 me-3"></div>
+    <div class="d-flex flex-column">
+        <div class="link">Create Student Account</div>
+        <div class="link-desc">View & Manage Student Account</div>
+    </div>
+</a> </li>
+<li> <a href="{% url 'create_student_subjects' %}" class="text-decoration-none d-flex align-items-start">
+    <div class="far fa-address-book pt-2 me-3"></div>
+    <div class="d-flex flex-column">
+        <div class="link">Create Student Subjects</div>
+        <div class="link-desc">View & Manage Class Subjects </div>
+    </div>
+</a> </li>
+
+
+{% elif request.user|has_group:'Teacher' %}
+<li class="active"> <a href="#" class="text-decoration-none d-flex align-items-start">
+    <div class="fas fa-box pt-2 me-3"></div>
+    <div class="d-flex flex-column">
+        <div class="link">My Account</div>
+        <div class="link-desc">Class Lists</div>
+    </div>
+</a> </li>
+
+{% elif request.user|has_group:'Student' %}
+{% endif %}
+
+{% endblock %}
+
+{% block content1 %}
+{% if request.user|has_group:'School_Admin' %} 
+<h2>{{school.schoolname}}</h2>
+{% endif %}
+{% if request.user|has_group:'School_Admin' %} 
+<div class="d-flex my-4 flex-wrap">
+    
+    <div class="box me-4 my-1 bg-light"> <img src="https://www.freepnglogos.com/uploads/love-png/love-png-heart-symbol-wikipedia-11.png" alt="">
+        <div class="d-flex align-items-center mt-2">
+            <div class="tag">Total Teachers</div>
+            <div class="ms-auto number">{{ teachers.count }}</div>
+        </div>
+    </div>
+</div>
+{% elif request.user|has_group:'Teacher' %}
+
+<div class="d-flex my-4 flex-wrap">
+    
+    <div class="box me-4 my-1 bg-light"> <img src="https://www.freepnglogos.com/uploads/love-png/love-png-heart-symbol-wikipedia-11.png" alt="">
+        <div class="d-flex align-items-center mt-2">
+            <div class="tag">Total Classes</div>
+            <div class="ms-auto number">{{ classes.count }}</div>
+        </div>
+    </div>
+</div>
+
+{% elif request.user|has_group:'Student' %}
+{% endif %}
+{% endblock %}
+
+{% block body %}
+{% if request.user|has_group:'Teacher' and teacherclass.teacher_taking_class1 != "empty" %}
+<div class="text-uppercase">Class Assign Lists</div>
+
+<div class="order my-3 bg-light">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="d-flex flex-column justify-content-between order-summary">
+                <div class="d-flex align-items-center">
+                    <div class="text-uppercase">Teacher_Subject :  </div><label>  {{ teacherclass.teacher_subject}}</label>
+                </div>
+                <div class="text-uppercase">Teacher Taking Class:</div>
+                <div class="fs-8">{{ teacherclass.teacher_taking_class1}}</div>
+                <div class="text-uppercase">Teacher Taking Section:</div>
+                <div class="fs-8">{{ teacherclass.teacher_taking_class1_section }}</div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="d-sm-flex align-items-sm-start justify-content-sm-between">
+                <div class="btn btn-primary text-uppercase"> Details</div>
+              
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% if request.user|has_group:'Teacher' and teacherclass.teacher_taking_class2 != "empty" %}
+<div class="order my-3 bg-light">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="d-flex flex-column justify-content-between order-summary">
+                <div class="d-flex align-items-center">
+                    <div class="text-uppercase">Teacher_Subject :  </div><label>  {{ teacherclass.teacher_subject}}</label>
+                </div>
+                <div class="text-uppercase">Teacher Taking Class:</div>
+                <div class="fs-8">{{ teacherclass.teacher_taking_class2}}</div>
+                <div class="text-uppercase">Teacher Taking Section:</div>
+                <div class="fs-8">{{ teacherclass.teacher_taking_class2_section }}</div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="d-sm-flex align-items-sm-start justify-content-sm-between">
+                <div class="btn btn-primary text-uppercase"> Details</div>
+              
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% if request.user|has_group:'Teacher' and teacherclass.teacher_taking_class3 != "empty" %}
+<div class="order my-3 bg-light">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="d-flex flex-column justify-content-between order-summary">
+                <div class="d-flex align-items-center">
+                    <div class="text-uppercase">Teacher_Subject :  </div><label>  {{ teacherclass.teacher_subject }}</label>
+                </div>
+                <div class="text-uppercase">Teacher Taking Class:</div>
+                <div class="fs-8">{{ teacherclass.teacher_taking_class3}}</div>
+                <div class="text-uppercase">Teacher Taking Section:</div>
+                <div class="fs-8">{{ teacherclass.teacher_taking_class3_section }}</div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="d-sm-flex align-items-sm-start justify-content-sm-between">
+                <div class="btn btn-primary text-uppercase"> Details</div>
+              
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% if request.user|has_group:'Teacher' and teacherclass.teacher_taking_class4 != "empty" %}
+<div class="order my-3 bg-light">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="d-flex flex-column justify-content-between order-summary">
+                <div class="d-flex align-items-center">
+                    <div class="text-uppercase">Teacher_Subject :  </div><label>  {{ teacherclass.teacher_subject}}</label>
+                </div>
+                <div class="text-uppercase">Teacher Taking Class:</div>
+                <div class="fs-8">{{ teacherclass.teacher_taking_class4}}</div>
+                <div class="text-uppercase">Teacher Taking Section:</div>
+                <div class="fs-8">{{ teacherclass.teacher_taking_class4_section }}</div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="d-sm-flex align-items-sm-start justify-content-sm-between">
+                <div class="btn btn-primary text-uppercase"> Details</div>
+              
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% if request.user|has_group:'Teacher' and teacherclass.teacher_taking_class5 != "empty" %}
+<div class="order my-3 bg-light">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="d-flex flex-column justify-content-between order-summary">
+                <div class="d-flex align-items-center">
+                    <div class="text-uppercase">Teacher_Subject :  </div><label>  {{ teacherclass.teacher_subject}}</label>
+                </div>
+                <div class="text-uppercase">Teacher Taking Class:</div>
+                <div class="fs-8">{{ teacherclass.teacher_taking_class5}}</div>
+                <div class="text-uppercase">Teacher Taking Section:</div>
+                <div class="fs-8">{{ teacherclass.teacher_taking_class5_section }}</div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="d-sm-flex align-items-sm-start justify-content-sm-between">
+                <div class="btn btn-primary text-uppercase"> Details</div>
+              
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
+{% endblock %}

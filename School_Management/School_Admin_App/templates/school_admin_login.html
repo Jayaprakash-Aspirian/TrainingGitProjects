@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{title}}</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" >
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js" rel="stylesheet" >
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" rel="stylesheet" >
+    <style>
+        .login,
+        .image {
+            min-height: 100vh
+        }
+        .bg-image {
+            background-image: url('https://res.cloudinary.com/dxfq3iotg/image/upload/v1561631318/img-123.jpg');
+            background-size: cover;
+            background-position: center center
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row no-gutter">
+            <div class="col-md-6 d-none d-md-flex bg-image"></div>
+            <div class="col-md-6 bg-light">
+                <div class="login d-flex align-items-center py-5">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-7 col-xl-6 mx-auto">
+                                <h3 class="display-4" style="color:rgb(158, 11, 11);">{{ title }}</h3> <br>
+                                <form method="POST" action={{action}}>
+                                    {% csrf_token %}
+                                    <div class="form-group mb-3"><label for="{{ form.username.id_for_label }}" class="fontsize_20">{{form.username.label_tag}}</label>{{form.username}}</div>
+                                    <div class="form-group mb-3"><label for="{{ form.password.id_for_label }}" class="fontsize_20">{{form.password.label_tag}}</label>{{form.password}} <br> </div>
+                                    <div class="custom-control custom-checkbox mb-3"> <input id="customCheck1" type="checkbox" checked class="custom-control-input"> <label for="customCheck1" class="custom-control-label">Remember password</label> </div> <button type="submit" class="btn btn-danger btn-block text-uppercase mb-2 rounded-pill shadow-sm">Sign in</button>
+                                    <div class="text-center d-flex justify-content-between mt-4">
+                                        <p> OR &nbsp<a href=" " class="font-italic text-muted"> <u>Forget Password</u></a></p>
+                                    </div>
+                                    {% for message in messages %}
+                                    {% if 'correct_message' in message.extra_tags %}
+                                        <b class="correct_message">{{message}}</b>
+                                    {% else %}
+                                        <b class="wrong_message">{{message}}</b>
+                                    {% endif %}
+                                {% endfor %}
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

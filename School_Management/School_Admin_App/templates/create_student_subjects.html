@@ -1,0 +1,94 @@
+{% extends 'main_admin_dashboard.html' %}
+{% load static %}
+{% block head %}
+<title>Create School Admin</title>
+{% endblock %}
+{% block content %}
+<li> <a href="{% url 'school_admin_dashboard' %}" class="text-decoration-none d-flex align-items-start">
+    <div class="fas fa-box pt-2 me-3"></div>
+    <div class="d-flex flex-column">
+        <div class="link">My Account</div>
+        <div class="link-desc">Teacher Lists</div>
+    </div>
+</a> </li>
+
+<li> <a href="{% url 'create_teacher_account' %}" class="text-decoration-none d-flex align-items-start">
+    <div class="far fa-address-book pt-2 me-3"></div>
+    <div class="d-flex flex-column">
+        <div class="link">Create Teachers Account</div>
+        <div class="link-desc">View & Manage Teachers Account</div>
+    </div>
+</a> </li>
+<li> <a href="{% url 'create_student_account' %}" class="text-decoration-none d-flex align-items-start">
+    <div class="far fa-address-book pt-2 me-3"></div>
+    <div class="d-flex flex-column">
+        <div class="link">Create Student Account</div>
+        <div class="link-desc">View & Manage Student Account</div>
+    </div>
+</a> </li>
+<li class="active"> <a href="#" class="text-decoration-none d-flex align-items-start">
+    <div class="far fa-address-book pt-2 me-3"></div>
+    <div class="d-flex flex-column">
+        <div class="link">Create Student Subjects</div>
+        <div class="link-desc">View & Manage Class Subjects </div>
+    </div>
+</a> </li>
+{% endblock %}
+{% block content1 %}
+<div class="d-flex my-4 flex-wrap">
+    
+    <div class="box me-4 my-1 bg-light"> <img src="https://www.freepnglogos.com/uploads/love-png/love-png-heart-symbol-wikipedia-11.png" alt="">
+        <div class="d-flex align-items-center mt-2">
+            
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block body %}
+
+<h2 >Class Subjects Add Details :</h2>
+
+<div class="order my-3 bg-light">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="d-flex flex-column justify-content-between order-summary">
+                <form action="/school_admin/addsubjects/" method="POST"  >
+                    <pre >
+                        {% csrf_token %}
+
+                        <div class="inputbox mt-3"><label for="{{ form.class_is.id_for_label }}" class="fontsize_20">{{form.class_is.label_tag}}   </label>{{form.class_is}}<br><span class="input">{{form.class_is.errors}}</span></div>
+                        <br>
+                        <div class="inputbox mt-3"><label for="{{ form.first_subject.id_for_label }}" class="fontsize_20">{{form.first_subject.label_tag}}   </label>{{form.first_subject}} <br><span class="input">{{form.first_subject.errors}}</span></div>
+                        <div class="inputbox mt-3"><label for="{{ form.second_subject.id_for_label }}" class="fontsize_20">{{form.second_subject.label_tag}} </label> {{form.second_subject}}<br><span class="input">{{form.second_subject.errors}}</span></div>
+                        <div class="inputbox mt-3"><label for="{{ form.third_subject.id_for_label }}" class="fontsize_20">{{form.third_subject.label_tag}}  </label>  {{form.third_subject}}<br><span class="input">{{form.third_subject.errors}}</span></div>
+                        <div class="inputbox mt-3"><label for="{{ form.fourth_subject.id_for_label }}" class="fontsize_20">{{form.fourth_subject.label_tag}}  </label> {{form.fourth_subject}}<br><span class="input">{{form.fourth_subject.errors}}</span></div>
+                        <div class="inputbox mt-3"><label for="{{ form.fifth_subject.id_for_label }}" class="fontsize_20">{{form.fifth_subject.label_tag}}  </label>     {{form.fifth_subject}}<br><span class="input">{{form.fifth_subject.errors}}</span></div>
+                        <div class="inputbox mt-3"><label for="{{ form.sixth_subject.id_for_label }}" class="fontsize_20">{{form.sixth_subject.label_tag}}  </label>     {{form.sixth_subject}}<br><span class="input">{{form.sixth_subject.errors}}</span></div>
+                        
+                    </pre>	 
+                        <div class="d-flex justify-content-between align-items-center">
+                             <div class="text-right"> <button class="btn btn-success register btn-block">+ Add Classes Subjects </button> </div> 
+                        </div>
+    
+
+                        <div>
+                            {% for message in messages %}
+                            <h5 class="wrong_message">{{message}}</h5>
+                            {% endfor %}
+                        </div>
+                    </pre>
+                </form>
+               
+ 
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <br><br><br>
+            <img src="{% static 'images/teacher_logo1.jpg' %}" width=250 height=200>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
